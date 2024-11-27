@@ -1,0 +1,41 @@
+html,
+body {
+  height: 100%;
+}
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: max-content;
+  gap: 25px;
+  align-items: start;
+  padding: 5% 50px 5% 50px;
+  position: relative;
+}
+
+.botoes-acoes {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 3%;
+  left: 0;
+  gap: 15px;
+}
+
+.fa-plus,
+.fa-right-from-bracket {
+  margin-right: 10px;
+}
+
+.botoes-acoes > button {
+  font-size: larger;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 0 0 0 0;
+  }
+  .botoes-acoes > button {
+    font-size: small;
+  }
+}
