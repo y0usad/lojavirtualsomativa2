@@ -18,5 +18,17 @@ const criarProduto = async (req, res) => {
     res.status(500).json({ mensagem: "algo deu erro.", error });
   }
 };
+const deletarProduto = async (req, res) => {
+  const { id } = req.body;
+  console.log(id);
+  try {
+    const deletarProduto = await prisma.product.delete({
+      where: { id: Number(id) },
+    });
+    res.status(200).json(deletarProduto);
+  } catch (error) {
+    res.status(500).json({ mensagem: "algo deu erro.", error });
+  }
+};
 
-module.exports = { criarProduto };
+module.exports = { criarProduto, deletarProduto };
