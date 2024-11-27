@@ -22,9 +22,11 @@ model User {
 model Product {
   id        Int       @id @default(autoincrement())
   name      String
-  quantity  Int       @default(1) // quantidade do produto
+  quantidade  Int       @default(1) // quantidade do produto
   price     Float
   userId    Int       // chave estrangeira para o usuario
+  img       String    // adiciona imagem ao produto
+  descricao String    // adiciona descrição ao produto
 
   user      User      @relation(fields: [userId], references: [id])
   createdAt DateTime  @default(now())
