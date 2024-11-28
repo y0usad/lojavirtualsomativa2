@@ -31,6 +31,58 @@ main {
 .botoes-acoes > button {
   font-size: larger;
 }
+/* css modal */
+
+dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  color: white;
+  border: none;
+  display: none;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+label {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.novo-lembrete {
+  width: 500px;
+  margin: 5% auto 0 auto;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.336);
+  border-radius: 15px;
+  position: relative;
+  height: fit-content;
+}
+textarea {
+  height: 150px;
+  resize: none !important;
+  border-radius: 5px;
+}
+.novo-lembrete > label > input {
+  border-radius: 5px;
+}
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+.btn-container > button {
+  font-size: large;
+  font-weight: 500;
+}
+
 @media (max-width: 600px) {
   main {
     padding: 0 0 0 0;
@@ -38,4 +90,17 @@ main {
   .botoes-acoes > button {
     font-size: small;
   }
+  .novo-lembrete {
+    margin: 35% 0 0 0;
+  }
+}
+
+.fa-x {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.fa-x:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }

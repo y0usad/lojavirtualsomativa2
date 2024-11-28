@@ -23,10 +23,29 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script defer src="./scripts/index.js"></script>
 
     <title>Lembretes</title>
   </head>
   <body class="bg-dark">
+    <dialog id="lembretes-modal">
+      <form class="novo-lembrete">
+        <i
+          onclick="fecharModal()"
+          class="fa-solid fa-x"
+          style="color: #ffffff"
+        ></i>
+        <h2>Novo Lembrete</h2>
+        <label>
+          <span>Novo Lembrete</span>
+          <input type="text" name="novo-lembrete" />
+        </label>
+        <label><span>Conteudo</span><textarea></textarea></label>
+        <div class="btn-container">
+          <button class="btn btn-primary">Criar Lembrete</button>
+        </div>
+      </form>
+    </dialog>
     <main>
       <div class="card">
         <div class="card-body">
@@ -101,7 +120,7 @@
         </div>
       </div>
       <div class="botoes-acoes">
-        <button class="btn btn-success">
+        <button onclick="abrirModal()" class="btn btn-success">
           <i class="fa-solid fa-plus fa-beat"></i>Criar Lembrete
         </button>
         <button class="btn btn-secondary">Deslogar</button>
