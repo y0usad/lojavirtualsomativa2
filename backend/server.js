@@ -3,11 +3,14 @@ const lembretesRotas = require("./rotas/lembretesRota");
 const authRota = require("./rotas/authRota");
 const express = require("express");
 const app = express();
-const port = 3000
+const cors = require("cors");
+const port = 3000;
 
-app.get("/produtos", async (req, res) => {
-  res.send("fazoL");
-});
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.json());
 // definindo rota para autenticação de usuario
