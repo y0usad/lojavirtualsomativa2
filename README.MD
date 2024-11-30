@@ -45,8 +45,6 @@ npm run dev
 
 ## Iniciar o Frontend
 
-```bash
-cd frotend
-```
+- Abra a pasta frontend no seu editor de codigo 
 
 - Abra o index.html com um live-server
