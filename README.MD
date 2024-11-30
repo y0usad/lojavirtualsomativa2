@@ -31,7 +31,7 @@ Webapp de lembretes desenvolvido com:
 ### Clonar o Repositório
 
 ```bash
-git clone [https://github.com/y0usad/lojavirtualsomativa2]
+git clone https://github.com/y0usad/lojavirtualsomativa2
 cd nome-do-repositorio
 ```
 
