@@ -32,7 +32,7 @@ Webapp de lembretes desenvolvido com:
 
 ```bash
 git clone https://github.com/y0usad/lojavirtualsomativa2
-cd nome-do-repositorio
+cd lojavirtualsomativa2
 ```
 
 ## Iniciar o Backend
