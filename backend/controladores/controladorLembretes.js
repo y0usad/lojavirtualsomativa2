@@ -24,10 +24,14 @@ const atualizarLembretes = async (req, res) => {
   }
 };
 const listarLembretes = async (req, res) => {
+  // const { idUsuario } = req.params;
+  // console.log(idUsuario);
+  // if (!idUsuario || isNaN(idUsuario)) {
+  //   return res.status(400).json({ error: "ID do usuário inválido." });
+  // }
   try {
-    const lembretes = await prisma.note.findMany({
-      include: { User: true },
-    });
+    const lembretes = await prisma.note.findMany({});
+    console.log(lembretes + "ERRO LEMBRETE");
     res.status(200).json({
       response: "ok",
       lembretes: lembretes,
@@ -43,15 +47,11 @@ const listarLembretes = async (req, res) => {
 const criarLembrete = async (req, res) => {
   try {
     // controlador que vai ser chamado quando houver uma requisição para /api/auth/criar-usuario
-    const user = await prisma.user.findUnique({
-      where: { email: "loko@hotmail.com" },
-    });
-    console.log(user);
-    const { title, content } = req.body;
-    console.log(title, content);
+    const { title, content, idUsuario } = req.body;
+    console.log(title, content, idUsuario);
 
     const novoLembrete = await prisma.note.create({
-      data: { userId: user.id, title, content },
+      data: { userId: Number(idUsuario), title, content },
     });
     res.status(200).json(novoLembrete);
   } catch (error) {

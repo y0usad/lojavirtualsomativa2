@@ -16,8 +16,9 @@ function fecharModal() {
 }
 
 async function getLembretes() {
+  const idUsuario = localStorage.getItem("id  ");
   try {
-    const resposta = await api.get("/lembretes");
+    const resposta = await api.get(`/lembretes/usuario/${idUsuario}`);
     console.log(resposta.data);
     const main = document.querySelector("main");
     const botoesAcoes = document.querySelector(".botoes-acoes");
@@ -58,13 +59,15 @@ criarLembreteForm.addEventListener("submit", async function (event) {
   }
 });
 async function confirmarEditarLembrete() {
+  const idUsuario = localStorage.getItem("id");
   const title = document.getElementById("form-title-input").value;
   const content = document.getElementById("form-content").value;
-  console.log(idLembrete + "CUSUJO");
+  console.log(idLembrete + "SUJO");
   try {
     const resposta = await api.put(`/lembretes/${idLembrete}`, {
       title,
       content,
+      idUsuario,
     });
     console.log(resposta);
     getLembretes();
@@ -75,12 +78,14 @@ async function confirmarEditarLembrete() {
 }
 
 async function criarLembrete() {
+  const idUsuario = localStorage.getItem("id");
   const title = document.getElementById("form-title-input").value;
   const content = document.getElementById("form-content").value;
   try {
     const resposta = await api.post("/lembretes", {
       title,
       content,
+      idUsuario,
     });
     console.log(resposta.data);
     getLembretes();
