@@ -1,6 +1,8 @@
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
 });
+let modo = "criar";
+let idLembrete;
 // selecionar modal
 
 function abrirModal() {
@@ -17,6 +19,10 @@ async function getLembretes() {
   try {
     const resposta = await api.get("/lembretes");
     console.log(resposta.data);
+    const main = document.querySelector("main");
+    const botoesAcoes = document.querySelector(".botoes-acoes");
+    main.innerHTML = "";
+    main.appendChild(botoesAcoes);
     inserirCartas(resposta.data.lembretes);
   } catch (error) {
     console.log(error);
@@ -35,7 +41,7 @@ function inserirCartas(lembretes) {
           ${lembrete.content}
           </p>
         </div>
-        <div class="edit-delete-btn"><i id=${lembrete.id} onclick="editarLembrete(event)" title="editar lembrete" class="fa-regular fa-pen-to-square" style="color: #75d317;"></i><i id=${lembrete.id} title="deletar lembrete" class="fa-solid fa-trash" style="color: #ff0000;"></i></div>
+        <div class="edit-delete-btn"><i id=${lembrete.id} onclick="editarLembrete(event)" title="editar lembrete" class="fa-regular fa-pen-to-square" style="color: #75d317;"></i><i id=${lembrete.id} onclick="excluirLembrete(event)" title="deletar lembrete" class="fa-solid fa-trash" style="color: #ff0000;"></i></div>
 
       </div>`;
     elementoMain.innerHTML += cartaHTML;
@@ -45,8 +51,28 @@ function inserirCartas(lembretes) {
 const criarLembreteForm = document.getElementById("clForm");
 criarLembreteForm.addEventListener("submit", async function (event) {
   event.preventDefault();
-  await criarLembrete();
+  if (modo === "criar") {
+    await criarLembrete();
+  } else {
+    await confirmarEditarLembrete();
+  }
 });
+async function confirmarEditarLembrete() {
+  const title = document.getElementById("form-title-input").value;
+  const content = document.getElementById("form-content").value;
+  console.log(idLembrete + "CUSUJO");
+  try {
+    const resposta = await api.put(`/lembretes/${idLembrete}`, {
+      title,
+      content,
+    });
+    console.log(resposta);
+    getLembretes();
+    fecharModal();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function criarLembrete() {
   const title = document.getElementById("form-title-input").value;
@@ -58,6 +84,7 @@ async function criarLembrete() {
     });
     console.log(resposta.data);
     getLembretes();
+    fecharModal();
   } catch (error) {
     console.log(error);
   }
@@ -68,17 +95,24 @@ async function editarLembrete(event) {
   const card = event.target.closest(".card");
   const cardTitle = card.querySelector(".card-title").textContent.trim();
   const cardText = card.querySelector(".card-text").textContent.trim();
+  modo = "editar";
+  idLembrete = id;
+  console.log(idLembrete);
   modalFormText("editar", cardText, cardTitle);
 
   abrirModal();
   try {
     const resposta = await api.put(`/lembretes/${id}`);
+    console.log(resposta);
+    getLembretes();
   } catch (error) {
     console.log(error);
   }
 }
 
 function novoLembrete() {
+  modo = "criar";
+  idLembrete = null;
   modalFormText();
   abrirModal();
 }
@@ -99,6 +133,26 @@ function modalFormText(modo, cardText, cardTitle) {
     formContent.value = "";
     formTituloInput.value = "";
     editCreateBtn.innerText = "Criar Lembrete";
+  }
+}
+async function excluirLembrete(event) {
+  const id = event.target.id;
+  // Solicitar confirmação ao usuário
+  const confirmacao = confirm(
+    "Tem certeza de que deseja excluir este lembrete?"
+  );
+
+  if (!confirmacao) {
+    // Se o usuário cancelar, não faz nada
+    return;
+  }
+
+  try {
+    const resposta = await api.delete(`/lembretes/${id}`);
+    console.log(resposta.data);
+    getLembretes();
+  } catch (error) {
+    console.log(error);
   }
 }
 
