@@ -24,13 +24,16 @@ const atualizarLembretes = async (req, res) => {
   }
 };
 const listarLembretes = async (req, res) => {
-  // const { idUsuario } = req.params;
-  // console.log(idUsuario);
-  // if (!idUsuario || isNaN(idUsuario)) {
-  //   return res.status(400).json({ error: "ID do usuário inválido." });
-  // }
+  let { idUsuario } = req.params;
+  idUsuario = parseInt(idUsuario);
+  console.log(idUsuario);
+  if (!idUsuario || isNaN(idUsuario)) {
+    return res.status(400).json({ error: "ID do usuário inválido." });
+  }
   try {
-    const lembretes = await prisma.note.findMany({});
+    const lembretes = await prisma.note.findMany({
+      where: { userId: idUsuario },
+    });
     console.log(lembretes + "ERRO LEMBRETE");
     res.status(200).json({
       response: "ok",

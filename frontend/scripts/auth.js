@@ -1,7 +1,8 @@
 const api = axios.create({
   baseURL: "http://localhost:3000/api/auth",
 });
-async function loginUsuario() {
+async function loginUsuario(event) {
+  event.preventDefault();
   const email = document.getElementById("inputloginemail").value;
   const password = document.getElementById("inputloginpassword").value;
   console.log(email, password);

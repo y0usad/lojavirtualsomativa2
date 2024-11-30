@@ -16,7 +16,7 @@ function fecharModal() {
 }
 
 async function getLembretes() {
-  const idUsuario = localStorage.getItem("id  ");
+  const idUsuario = localStorage.getItem("id");
   try {
     const resposta = await api.get(`/lembretes/usuario/${idUsuario}`);
     console.log(resposta.data);
