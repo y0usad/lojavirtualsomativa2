@@ -29,6 +29,10 @@ async function getLembretes() {
     console.log(error);
   }
 }
+function deslogar() {
+  localStorage.clear();
+  window.location.href = "/login.html";
+}
 
 function inserirCartas(lembretes) {
   const elementoMain = document.querySelector("main");

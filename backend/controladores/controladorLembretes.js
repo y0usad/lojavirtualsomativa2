@@ -25,9 +25,8 @@ const atualizarLembretes = async (req, res) => {
 };
 const listarLembretes = async (req, res) => {
   let { idUsuario } = req.params;
-  idUsuario = parseInt(idUsuario);
   console.log(idUsuario);
-  if (!idUsuario || isNaN(idUsuario)) {
+  if (!idUsuario) {
     return res.status(400).json({ error: "ID do usuário inválido." });
   }
   try {
@@ -54,7 +53,7 @@ const criarLembrete = async (req, res) => {
     console.log(title, content, idUsuario);
 
     const novoLembrete = await prisma.note.create({
-      data: { userId: Number(idUsuario), title, content },
+      data: { userId: idUsuario, title, content },
     });
     res.status(200).json(novoLembrete);
   } catch (error) {

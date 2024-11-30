@@ -4,12 +4,13 @@ const prisma = new PrismaClient();
 const criarUsuario = async (req, res) => {
   try {
     // controlador que vai ser chamado quando houver uma requisição para /api/auth/criar-usuario
-    const { name, email, password } = req.body;
-    console.log(name, email, password);
+    const { email, password } = req.body;
+    console.log(email, password);
     const novoUsuario = await prisma.user.create({
-      data: { name, email, password },
+      data: { email, password },
     });
-    res.status(200).json({ name, email, password });
+    const { id } = novoUsuario;
+    res.status(200).json({ id });
   } catch (error) {
     res.status(500).json({ mensagem: "algo deu erro.", error });
   }

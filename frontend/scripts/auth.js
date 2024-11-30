@@ -10,6 +10,21 @@ async function loginUsuario(event) {
     const resposta = await api.post("/login", { email, password });
     console.log(resposta);
     localStorage.setItem("id", resposta.data.id);
+    window.location.href = "/";
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function criarConta(event) {
+  event.preventDefault();
+  const email = document.getElementById("inputcriaremail").value;
+  const password = document.getElementById("inputcriarpassword").value;
+  console.log(email, password);
+  try {
+    const resposta = await api.post("/criar-usuario", { email, password });
+    console.log(resposta);
+    localStorage.setItem("id", resposta.data.id);
+    window.location.href = "/";
   } catch (error) {
     console.log(error);
   }

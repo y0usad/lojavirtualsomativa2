@@ -17,13 +17,18 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <script>
+      if (!localStorage.getItem("id")) {
+        window.location.href = "/login.html";
+      }
+    </script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"
       integrity="sha512-v8+bPcpk4Sj7CKB11+gK/FnsbgQ15jTwZamnBf/xDmiQDcgOIYufBo6Acu1y30vrk8gg5su4x0CG3zfPaq5Fcg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    
+
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -76,7 +81,7 @@
         <button onclick="novoLembrete()" class="btn btn-success">
           <i class="fa-solid fa-plus fa-beat"></i>Criar Lembrete
         </button>
-        <button class="btn btn-secondary">Deslogar</button>
+        <button class="btn btn-secondary" onclick="deslogar()">Deslogar</button>
       </div>
     </main>
   </body>
