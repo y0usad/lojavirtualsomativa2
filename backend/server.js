@@ -1,4 +1,4 @@
-// aqui foi criado o server com express
+// Rest api usando express e prisma
 const lembretesRotas = require("./rotas/lembretesRota");
 const authRota = require("./rotas/authRota");
 const express = require("express");

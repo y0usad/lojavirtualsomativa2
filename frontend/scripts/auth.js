@@ -1,3 +1,4 @@
+// funcoes para login e criação de conta de usuario 
 const api = axios.create({
   baseURL: "http://localhost:3000/api/auth",
 });

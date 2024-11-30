@@ -1,3 +1,4 @@
+// Controladores que criam/deleta/editam e listam os lembretes
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 

@@ -1,3 +1,4 @@
+// Controladores que criam e fazem login de usuario
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
