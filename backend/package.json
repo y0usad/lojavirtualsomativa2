@@ -18,7 +18,9 @@
     "express": "^4.21.1"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.0",
     "nodemon": "^3.1.7",
-    "prisma": "^5.22.0"
+    "prisma": "^5.22.0",
+    "prisma-erd-generator": "^1.11.2"
   }
 }

@@ -26,9 +26,11 @@ const loginUsuario = async (req, res) => {
   try {
     console.log(email, password);
     if (!email || !password)
-      return res.status(400).json({ res: "Faltando senha/email" });
+      return res.status(400).json({ mensagem: "Faltando senha/email" });
     const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) res.status(404).json({ mensagem: "Email não encontrado!" });
     const senhaCorreta = await bcrypt.compare(password, user.password);
+    console.log(senhaCorreta);
     if (!senhaCorreta) {
       return res.status(401).json({ mensagem: "Email ou Senha errado." });
     }

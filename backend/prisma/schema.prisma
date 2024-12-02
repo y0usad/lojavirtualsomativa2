@@ -1,11 +1,15 @@
 // aqui foi criado os schemas para data base em SQL
+// a gente usou um ORM que é o prisma, o prisma transforma javascript em sql, o select from é feito no prisma com os metodos find unique, findMeny
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = "mysql://root:admin@localhost:3306/lembretes"
+}
+generator erd {
+  provider = "prisma-erd-generator"
 }
 
 model User {
