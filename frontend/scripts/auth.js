@@ -15,8 +15,9 @@ async function loginUsuario(event) {
   } catch (error) {
     const errorLogin = document.getElementById("errorLogin");
     console.log(error);
-    const mensagemDeErro = error?.response?.data?.mensagem;
-    errorLogin.innerText = mensagemDeErro;
+    const erro = error.response.data.error;
+
+    errorLogin.innerText = erro;
   }
 }
 async function criarConta(event) {

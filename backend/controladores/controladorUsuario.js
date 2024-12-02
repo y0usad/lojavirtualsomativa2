@@ -26,18 +26,18 @@ const loginUsuario = async (req, res) => {
   try {
     console.log(email, password);
     if (!email || !password)
-      return res.status(400).json({ mensagem: "Faltando senha/email" });
+      throw new Error("Dados Invalidos!")
     const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) res.status(404).json({ mensagem: "Email não encontrado!" });
+    if (!user) throw new Error("Email não cadastrado!")
     const senhaCorreta = await bcrypt.compare(password, user.password);
     console.log(senhaCorreta);
     if (!senhaCorreta) {
-      return res.status(401).json({ mensagem: "Email ou Senha errado." });
+      throw new Error("Senha Incorreta!");
     }
     const { id } = user;
     res.status(200).json({ id });
   } catch (error) {
-    res.status(500).json({ mensagem: "algo deu erro.", error });
+    res.status(500).json({ error: error.message });
   }
 };
 
